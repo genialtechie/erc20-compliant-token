@@ -64,7 +64,7 @@ contract('My Ico', function(accounts){
         const allowance = await instance.allowance(accounts[0], accounts[1]);
         assert.equal(allowance, 100);
     });
-    it('test transfer function ', async function(){
+    it('test transfer from function ', async function(){
         try{
             await instance.approve(accounts[1], 10);
             //test exception by sending more coins than approved

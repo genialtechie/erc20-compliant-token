@@ -1,6 +1,11 @@
 const MyIco = artifacts.require("MyIco");
+const TokenSale = artifacts.require("TokenSale");
+// const tokenPrice = 100000000000000000;
 
 module.exports = function (deployer) {
-  //deploy contract and set supply to 1000
-  deployer.deploy(MyIco, 1000);
+  //deploy contract and set values
+  deployer.then(async () =>{
+    await deployer.deploy(MyIco, 1000);
+    await deployer.deploy(TokenSale, MyIco.address, 100000000000000000n);
+  });
 };

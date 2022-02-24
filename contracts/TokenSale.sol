@@ -7,7 +7,7 @@ import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 contract TokenSale {
 
     using SafeMath for uint;
-    address admin;
+    address payable admin;
     uint public tokenPrice;
     uint public tokensSold;
     MyIco public tokenContract;
@@ -15,7 +15,7 @@ contract TokenSale {
     event Sell(address _to, uint _amount);
 
     constructor(MyIco _tokenContract, uint _tokenPrice){
-        admin = msg.sender;
+        admin = payable(msg.sender);
         tokenContract = _tokenContract;
         tokenPrice = _tokenPrice;
     }
@@ -34,5 +34,14 @@ contract TokenSale {
 
         tokensSold += nOfTokens;
         emit Sell(msg.sender, nOfTokens);
+    }
+
+    function endSale() public {
+        //make sure caller is admin
+        require(msg.sender == admin);
+        //transfer remaining tokens
+        require(tokenContract.transfer(admin, tokenContract.balanceOf(address(this))));
+        //end sale and send balance to admin
+        selfdestruct(admin);
     }
 }

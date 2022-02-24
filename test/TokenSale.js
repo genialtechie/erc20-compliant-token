@@ -46,7 +46,27 @@ contract('Token Sale Contract', function(accounts){
         console.log(`You just bought ${transfer.logs[0].args._amount}HBO to ${transfer.logs[0].args._to}`);
         const tokensSold = await instance.tokensSold.call();
         assert.equal(tokensSold, 10);
+
+        await instance.buyTokens(10, {from: buyer, value: 10 * Number(tokenPrice)});
         const contractBalance = await tokenInstance.balanceOf(instance.address);
         assert.equal(contractBalance, 490);
     });
+
+    it('end sale', async function(){
+        tokenInstance = await Token.deployed();
+        try{
+
+            //try ending sale from different account
+            await instance.endSale({from: buyer});
+        }
+        catch(error){
+            assert.fail;
+            assert(error.message.indexOf('revert') >= 0, 'error must contain revert');
+        }
+        // end sale from admin
+        const end = await instance.endSale({from: admin});
+        assert.ok(end);
+        const bal = await tokenInstance.balanceOf(admin);
+        assert.equal(bal, 990)
+    })
 });

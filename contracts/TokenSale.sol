@@ -2,20 +2,37 @@
 pragma solidity >=0.4.22 <0.9.0;
 
 import "./MyIco.sol";
+import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 
 contract TokenSale {
 
-  address admin;
-  uint public tokenPrice = 100000000000000000;
-  MyIco public tokenContract;
+    using SafeMath for uint;
+    address admin;
+    uint public tokenPrice;
+    uint public tokensSold;
+    MyIco public tokenContract;
 
-  constructor(MyIco _tokenContract, uint _tokenPrice){
-    admin = msg.sender;
-    tokenContract = _tokenContract;
-    tokenPrice = _tokenPrice;
-  }
+    event Sell(address _to, uint _amount);
 
-  function buyTokens(uint nOfTokens) public {
-      
-  }
+    constructor(MyIco _tokenContract, uint _tokenPrice){
+        admin = msg.sender;
+        tokenContract = _tokenContract;
+        tokenPrice = _tokenPrice;
+    }
+
+    function multiply(uint a, uint b) internal pure returns(uint z){
+        return SafeMath.mul(a, b);
+    }
+
+    function buyTokens(uint nOfTokens) public payable {
+        //make sure user is sending enough eth
+        require(msg.value == multiply(nOfTokens, tokenPrice));
+        //make sure contract has enough tokens
+        require(tokenContract.balanceOf(address(this)) >= nOfTokens);
+        //transfer tokens
+        require(tokenContract.transfer(msg.sender, nOfTokens));
+
+        tokensSold += nOfTokens;
+        emit Sell(msg.sender, nOfTokens);
+    }
 }

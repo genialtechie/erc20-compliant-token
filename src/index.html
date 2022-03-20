@@ -9,8 +9,17 @@
     <title>Mint</title>
 </head>
 <body>
-    <div class="container">
-        
+    <div id="loading" class="container">
+        <div class="d-flex align-items-center">
+            <strong>Loading...</strong>
+            <div class="spinner-border ms-auto" role="status" aria-hidden="true"></div>
+        </div>
+    </div>
+    <div id="landing" class="container">
+        <button id="connect-web3" type="submit" class="btn btn-primary">Connect</button>
+    </div>
+    <div id="mint" class="container hide">
+        <button id="mint-tkns" type="submit" class="btn btn-primary">Mint</button>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="js/web3.min.js"></script>

@@ -2,8 +2,8 @@
 pragma solidity >=0.4.22 <0.9.0;
 
 contract MyIco {
-  string public name = "HBOToken";
-  string public symbol = "HBO";
+  string public name = "Token";
+  string public symbol = "MTK";
   uint8 public decimals = 0;
   uint public totalSupply;
   //Transfer event 

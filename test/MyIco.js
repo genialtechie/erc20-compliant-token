@@ -18,8 +18,8 @@ contract('My Ico', function(accounts){
         
         //check values
         assert.equal(totalSupply, 1000);
-        assert.equal(name, "HBOToken");
-        assert.equal(symbol, "HBO");
+        assert.equal(name, "Token");
+        assert.equal(symbol, "MTK");
     });
 
     it('check balance of deployer', async function(){

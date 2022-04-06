@@ -55,6 +55,10 @@ App = {
         });
     },
 
+    qtyCtrl: function() {
+        
+    },
+
     loadData: async function() {
         try {
             //get the first account from the connected accounts

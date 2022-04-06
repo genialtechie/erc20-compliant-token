@@ -40,8 +40,18 @@ App = {
             // Set the provider for contract
             App.contracts.Token.setProvider(App.web3Provider);
 
-            // Use contract to retrieve blockchain data
-            return App.loadData();
+        }).then(function () {
+            $.getJSON('TokenSale.json', function(data) {
+                // Get the necessary contract artifact file and instantiate it with @truffle/contract
+                const crowdsale = data;
+                App.contracts.Crowdsale = TruffleContract(crowdsale);
+              
+                // Set the provider for contract
+                App.contracts.Crowdsale.setProvider(App.web3Provider);
+    
+                // Use contract to retrieve blockchain data
+                return App.loadData();
+            });
         });
     },
 
@@ -55,7 +65,29 @@ App = {
             //set default account and create contract instance 
             web3.eth.defaultAccount = App.currentAccount;
             const token = await App.contracts.Token.deployed();
+
+            const balance = await token.balanceOf(App.currentAccount);
+            console.log(Number(balance));
             
+        } catch (error) {
+            console.error(error)
+        }
+    },
+
+    sendTokens: async function() {
+        try {
+            const token = await App.contracts.Token.deployed();
+            const crowdsale = await App.contracts.Crowdsale.deployed();
+
+            const price = await crowdsale.tokenPrice.call();
+            App.tokenPrice = Number(price);
+
+            const transfer = await crowdsale.buyTokens(App.mintQty, 
+                {
+                    from: App.currentAccount, 
+                    value: App.mintQty * Number(App.tokenPrice)
+                });
+
         } catch (error) {
             console.error(error)
         }

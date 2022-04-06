@@ -14,3 +14,11 @@ body{
 .hide {
     display: none;
 }
+
+#mint{
+    min-height: 90vh;
+}
+
+.mint-div{
+    min-height: inherit;
+}

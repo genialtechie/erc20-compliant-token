@@ -3,6 +3,7 @@ body{
     flex-direction: column;
     justify-content: center;
     height: 100vh;
+    background: #96E7E8;
 }
 
 .container {
@@ -21,4 +22,9 @@ body{
 
 .mint-div{
     min-height: inherit;
+}
+
+.btn {
+    background: #382392;
+    font: 20px 'hollabearregular'
 }

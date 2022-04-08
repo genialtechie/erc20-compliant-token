@@ -55,16 +55,12 @@ App = {
         });
     },
 
-    qtyCtrl: function() {
-        
-    },
-
     loadData: async function() {
         try {
             //get the first account from the connected accounts
             const [account] = await ethereum.request({method: 'eth_accounts'});
             App.currentAccount = account;
-            $('.user-address').html(`Connected to ${App.currentAccount}`);
+            $('.user-address').html(`Connected`);
 
             //set default account and create contract instance 
             web3.eth.defaultAccount = App.currentAccount;
@@ -86,10 +82,12 @@ App = {
             const price = await crowdsale.tokenPrice.call();
             App.tokenPrice = Number(price);
 
-            const transfer = await crowdsale.buyTokens(App.mintQty, 
+            const qty = $('#mint-qty').val();
+
+            const transfer = await crowdsale.buyTokens(qty, 
                 {
                     from: App.currentAccount, 
-                    value: App.mintQty * Number(App.tokenPrice)
+                    value: qty * Number(App.tokenPrice)
                 });
 
         } catch (error) {
@@ -100,7 +98,7 @@ App = {
 
 $(window).on('load', async function(){
     // init web3 on page reload
-    App.initWeb3();
+    //App.initWeb3();
     //Init web3 and token
     $('#connect-web3 ,#mint-tkns').click( function (event) {
         event.preventDefault();

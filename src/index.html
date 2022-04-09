@@ -10,30 +10,35 @@
     <title>Mint</title>
 </head>
 <body>
-    <div id="home">
-        <div id="loading" class="container">
-            <div class="d-flex align-items-center">
-                <strong>Loading...</strong>
-                <div class="spinner-border ms-auto" role="status" aria-hidden="true"></div>
-            </div>
+    <div class="container vh-100" id="body">
+        <div class="navbar m-2 px-3 border border-3 rounded my-5">
+            <span class="navbar-brand font">
+                <img src="img/dropvector.png" alt="">
+                <span class="px-3 pt-2">0.065 ETH per droplet</span>
+            </span>
+            <span>
+                <button id="cnct-wallet" type="submit" class="btn btn-primary">Connect wallet</button>
+            </span>
         </div>
-        <div id="landing" class="container">
-            <button id="connect-web3" type="submit" class="btn btn-primary">Connect wallet</button>
+        <div id="components ">
+            <h1 class="text-center mb-4 title">DROPLETS</h1>
+            <div id="landing" class="container mx-auto w-25 p-3 border border-3 rounded">
+                <div id="prof1" class="container d-flex flex-column">
+                    <img src="img/droplet.png" alt="" class="mb-2">
+                    <button id="connect-web3" type="submit" class="btn btn-primary">Connect wallet</button>
+                </div>
+            </div>
+            <div id="mint" class="container mx-auto w-25 p-3 border border-3 rounded hide">
+                <div id="prof2" class="container d-flex flex-column">
+                    <img src="img/droplet.png" alt="" class="mb-2">
+                    <input type="number" name="quantity" id="mint-qty" value="1" min="1" max="10">
+                    <button id="mint-tkns" type="submit" class="btn btn-primary">Mint</button>
+                </div>
+            </div>
         </div>
     </div>
     
-    <div id="mint" class="container hide">
-        <div class="my-5 navbar"></div>
-        <div class="container d-flex flex-column justify-content-center mint-div">
-            <div  class="align-self-center pb-3">
-                <input type="number" name="quantity" id="mint-qty" value="1" min="1" max="10">
-            </div>
-            <div class="align-self-center pb-3">
-                <button id="mint-tkns" type="submit" class="btn btn-primary">Mint</button>
-            </div>
-        </div>
-        <div class="result"></div>
-    </div>
+    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="js/web3.min.js"></script>
     <script src="js/truffle-contract.js"></script>

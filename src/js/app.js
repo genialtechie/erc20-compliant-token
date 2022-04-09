@@ -11,12 +11,12 @@ App = {
             // Request account access
             await ethereum.request({method: 'eth_requestAccounts'});
             //if accounts are succesfully accessed, change UI
-            $('#landing ,#loading').addClass('hide');
+            $('#landing').addClass('hide');
             $('#mint').removeClass('hide');
             } catch (error) {
             // User denied account access...
             console.error("User denied account access");
-            alert('Please connect MetaMask to use HBO Wallet');
+            alert('Please connect MetaMask to mint');
             }
         }
         // Legacy dapp browsers...
@@ -100,12 +100,8 @@ $(window).on('load', async function(){
     // init web3 on page reload
     //App.initWeb3();
     //Init web3 and token
-    $('#connect-web3 ,#mint-tkns').click( function (event) {
+    $('#connect-web3 ,#mint-tkns, #cnct-wallet').click( function (event) {
         event.preventDefault();
-        if(event.target.id == 'connect-web3'){
-            App.initWeb3();
-        } else {
-            App.sendTokens();
-        }
+        event.target.id == 'mint-tkns' ? App.sendTokens() : App.initWeb3();
     });
 });

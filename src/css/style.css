@@ -8,23 +8,35 @@ body{
 
 .container {
     min-width: fit-content;
-    text-align: center;
-    margin-bottom: 50px;
 }
 
 .hide {
     display: none;
 }
 
-#mint{
-    min-height: 90vh;
-}
-
-.mint-div{
-    min-height: inherit;
-}
-
 .btn {
     background: #382392;
-    font: 20px 'hollabearregular'
+    font: 1.25rem 'hollabearregular';
+}
+
+.font {
+    font: 20px 'hollabearregular';
+    color: #382392;
+}
+
+.border{
+    border-color: #382392 !important;
+}
+
+.navbar, #landing {
+    background: #fff;
+}
+
+.title{
+    font-family: 'hollabearregular';
+    color: #382392;
+}
+
+#landing, #mint {
+    z-index: 10;
 }

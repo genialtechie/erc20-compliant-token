@@ -1,8 +1,4 @@
 body{ 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: 100vh;
     background: #96E7E8;
 }
 
@@ -28,7 +24,7 @@ body{
     border-color: #382392 !important;
 }
 
-.navbar, #landing {
+.navbar, #landing, #mint {
     background: #fff;
 }
 
@@ -37,6 +33,24 @@ body{
     color: #382392;
 }
 
-#landing, #mint {
+.banner {
+    position: fixed;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    width: 100%;
+    background: no-repeat center url('../img/banner.png');
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+#components{
+    position: absolute;
+}
+
+#components {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     z-index: 10;
 }

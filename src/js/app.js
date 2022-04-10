@@ -60,14 +60,13 @@ App = {
             //get the first account from the connected accounts
             const [account] = await ethereum.request({method: 'eth_accounts'});
             App.currentAccount = account;
-            $('.user-address').html(`Connected`);
+            $('#user-address').html(`Connected`);
 
             //set default account and create contract instance 
             web3.eth.defaultAccount = App.currentAccount;
             const token = await App.contracts.Token.deployed();
 
             const balance = await token.balanceOf(App.currentAccount);
-            console.log(Number(balance));
             
         } catch (error) {
             console.error(error)
@@ -98,9 +97,9 @@ App = {
 
 $(window).on('load', async function(){
     // init web3 on page reload
-    //App.initWeb3();
+    ethereum.isConnected() ? App.initWeb3() : console.log('connect to metamask');
     //Init web3 and token
-    $('#connect-web3 ,#mint-tkns, #cnct-wallet').click( function (event) {
+    $('#connect-web3 ,#mint-tkns, #user-address').click( function (event) {
         event.preventDefault();
         event.target.id == 'mint-tkns' ? App.sendTokens() : App.initWeb3();
     });
